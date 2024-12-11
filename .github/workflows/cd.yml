@@ -12,7 +12,7 @@ jobs:
       packages: write
     env:
       REGISTRY: ghcr.io/trevatk
-      IMAGE_NAME: httpbin:0.0.1
+      IMAGE_NAME: httpbin:v0.0.2
     steps:
       - name: Checkout
         uses: actions/checkout@v4
