@@ -7,14 +7,14 @@ RUN go mod tidy && go mod verify
 
 COPY . ./
 
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /usr/src/bin/server ./cmd/server
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /usr/src/bin/httpbin ./cmd/server
 
-FROM scratch
+FROM gcr.io/distroless/static-debian12:nonroot
 
 WORKDIR /usr/local/bin
 
-USER httpbin
+COPY --from=builder /usr/src/bin/httpbin ./
 
-COPY --from=builder /usr/src/bin/server .
+EXPOSE 8080
 
-ENTRYPOINT ["server"]
+ENTRYPOINT [ "httpbin" ]
