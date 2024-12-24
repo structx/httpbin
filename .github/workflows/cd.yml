@@ -1,4 +1,3 @@
-
 name: Container Registry Push
 
 on:
@@ -11,8 +10,8 @@ jobs:
       contents: read
       packages: write
     env:
-      REGISTRY: ghcr.io/trevatk
-      IMAGE_NAME: httpbin:v0.0.2
+      REGISTRY: ghcr.io/structx
+      IMAGE_NAME: httpbin:v0.0.1
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -39,6 +38,6 @@ jobs:
         uses: aquasecurity/trivy-action@0.29.0
         with:
           image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          format: 'table'
-          exit-code: '0'
+          format: "table"
+          exit-code: "0"
           ignore-unfixed: true
